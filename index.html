@@ -260,14 +260,14 @@
   <div class="container">
     <section id="home" class="active">
       <h2>احترافي برمجه ✨</h2>
-      <p>استكشف الموقع الذي تم تصميمه بشكل احترافي علي يد المبرمج MAND 👨‍💻</p>
+      <p>تم تصميمه بشكل احترافي علي يد المبرمج 1g𝒁 👨‍💻</p>
       <a href="#" class="cta-button" onclick="showSection('services')">ابدأ الآن 🚀</a>
     </section>
 
     <section id="about">
       <h2>من نحن 👨‍💻</h2>
       <p>نحن مجموعة من الجيمرز والمبرمجين نؤمن بالإبداع والتطوير ونقدم خبراتنا لتقديم محتوى رقمي احترافي. 👾</p>
-      <p><strong>المبرمج MANDO</strong></p>
+      <p><strong>المبرمج 1g𝒁</strong></p>
     </section>
 
     <section id="services">
@@ -275,23 +275,22 @@
 
       <div class="service-buttons">
         <a href="#" onclick="toggleXpItems()">🔹 مساعدة لزيادة XP</a>
-        <a href="#" onclick="toggleIllegalItems()">🔒 شراء ممنوعات</a>
+        <a href="#" onclick="toggleIllegalItems()">🤖 برمجة بوتات بايثون</a>
       </div>
 
       <div class="dropdown-container">
         <ul id="xp-items" class="dropdown-list" style="display: none;">
-          <li onclick="addToCart('أخشاب', 900)">🪵 أخشاب</li>
-          <li onclick="addToCart('دواجن', 250)">🐔 دواجن</li>
-          <li onclick="addToCart('معادن', 2000)">⛏️ معادن</li>
+          <li onclick="addToCart('🪵 أخشاب', 900)">🪵 أخشاب</li>
+          <li onclick="addToCart('📈 زيادة خبرتك', 250)">📈 زيادة خبرتك</li>
+          <li onclick="addToCart('🐍 تعليم بايثون', 2000)">🐍 تعليم بايثون</li>
         </ul>
 
         <ul id="illegal-items" class="dropdown-list" style="display: none;">
-          <li onclick="addToCart('معادن تشكيل', 20)">💎 معادن تشكيل</li>
-          <li onclick="addToCart('حشيش', 1)">🌱 حشيش</li>
-          <li onclick="addToCart('كوكاين', 5)">💊 كوكاين</li>
-          <li onclick="addToCart('ذخائر', 0.9)">🔫 ذخائر</li>
-          <li onclick="addToCart('ستر', 1)">🦺 ستره</li>
-          <li onclick="addToCart('مساعدة تهريب', 0)">🚚 مساعدة تهريب</li>
+          <li onclick="addToCart('🤖 بوت ديسكورد متكامل', 20)">بوت ديسكورد متكامل</li>
+          <li onclick="addToCart('🎵 بوت موسيقى', 5)">بوت موسيقى</li>
+          <li onclick="addToCart('🛡️ بوت سيكيورتي', 10)">بوت سيكيورتي</li>
+          <li onclick="addToCart('👋 بوت ترحيب', 5)">بوت ترحيب</li>
+          <li onclick="addToCart('⚙️ بوت إدارة', 8)">بوت إدارة</li>
         </ul>
       </div>
     </section>
@@ -308,14 +307,14 @@
       <h3>تفاصيل السلة 🛍️</h3>
       <div id="cart-content"></div>
       <div class="cart-total">المجموع: <span id="cart-total">0</span> K</div>
-      <div class="submit-order-btn" onclick="submitOrder()">إرسال الطلب</div>
+      <div class="submit-order-btn" onclick="submitOrder()">إرسال الطلب 🚀</div>
     </div>
 
     <div class="add-toast" id="toast-message">تم إضافة العنصر إلى السلة ✔️</div>
   </div>
 
   <footer>
-    <p>© 2025 حقوق النشر محفوظة | تصميم من فريق الجيمرز والمبرمجين</p>
+    <p>© 2025 جميع الحقوق محفوظة | تصميم من فريق الجيمرز والمبرمجين</p>
   </footer>
 
   <script>
@@ -342,7 +341,7 @@
         cart.push({ name: item, price: price, quantity: 1 });
       }
       updateCart();
-      showToast(`تم إضافة ${item} إلى السلة`);
+      showToast(`تم إضافة ${item} إلى السلة 🛒`);
     }
 
     function removeFromCart(itemName) {
@@ -351,7 +350,7 @@
         cart.splice(itemIndex, 1);
       }
       updateCart();
-      showToast(`تم حذف ${itemName} من السلة`);
+      showToast(`🗑️ تم حذف ${itemName} من السلة`);
     }
 
     function decreaseQuantity(itemName) {
@@ -369,21 +368,19 @@
         cartContent.innerHTML += `
           <div class="cart-item">
             <span>${item.name}</span> - ${item.quantity} × ${item.price}
-            <button onclick="decreaseQuantity('${item.name}')">-</button>
-            <button onclick="removeFromCart('${item.name}')">حذف</button>
+            <button onclick="decreaseQuantity('${item.name}')">➖</button>
+            <button onclick="removeFromCart('${item.name}')">🗑️</button>
           </div>
         `;
         total += item.price * item.quantity;
       });
-      cartTotal.innerText = total
+      cartTotal.innerText = total;
     }
 
     function showToast(message) {
       toastMessage.innerText = message;
       toastMessage.style.display = 'block';
-      setTimeout(() => {
-        toastMessage.style.display = 'none';
-      }, 2000);
+      setTimeout(() => toastMessage.style.display = 'none', 2000);
     }
 
     function toggleIllegalItems() {
@@ -396,18 +393,53 @@
       xpItems.style.display = xpItems.style.display === 'none' ? 'block' : 'none';
     }
 
+    // ✅ إرسال الطلب إلى Discord
     function submitOrder() {
-      showToast('تم إرسال الطلب بنجاح 🎉');
-      cart = [];
-      updateCart();
+      if (cart.length === 0) {
+        showToast('🚫 السلة فارغة! أضف عناصر أولاً.');
+        return;
+      }
+
+      const now = new Date();
+      const time = now.toLocaleTimeString('ar-EG');
+      const date = now.toLocaleDateString('ar-EG');
+
+      let orderMessage = "📦 **طلب جديد من موقع الجيمرز والمبرمجين!**\n";
+      orderMessage += `🧑‍💻 **المبرمج:** 1g𝒁\n`;
+      orderMessage += `🕒 **الوقت:** ${time} - ${date}\n\n`;
+      orderMessage += "🛒 **تفاصيل الطلب:**\n";
+
+      cart.forEach(item => {
+        orderMessage += `> 💠 ${item.name} × ${item.quantity} = 💰 ${item.price * item.quantity}K\n`;
+      });
+
+      const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      orderMessage += `\n💵 **المجموع الكلي:** ${total}K\n`;
+      orderMessage += "✅ **تم الإرسال من موقع 1g𝒁 🔥**";
+
+      fetch("https://discord.com/api/webhooks/1436112997905862677/ylK3AYDRlpkKsusbjjwr43dUgtKQe4cuEzYTBNXyMM0SqcNnG9Elyg-M_BDMzgkTTUTJ", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: orderMessage })
+      })
+      .then(res => {
+        if (res.ok) {
+          showToast('🎉 تم إرسال الطلب بنجاح إلى ديسكورد!');
+          cart = [];
+          updateCart();
+        } else {
+          showToast('⚠️ حدث خطأ أثناء الإرسال!');
+        }
+      })
+      .catch(() => showToast('🚨 لم يتم الاتصال بالويب هوك.'));
     }
 
     function submitSupportMessage() {
       if (supportMessage.value) {
-        alert('تم إرسال الرسالة للدعم الفني بنجاح! شكراً على تواصلك.');
+        alert('✅ تم إرسال الرسالة للدعم الفني بنجاح!');
         supportMessage.value = '';
       } else {
-        alert('الرجاء كتابة رسالة قبل الإرسال!');
+        alert('⚠️ الرجاء كتابة رسالة قبل الإرسال!');
       }
     }
 
@@ -415,6 +447,5 @@
       cartDetailsContainer.style.display = cartDetailsContainer.style.display === 'none' ? 'block' : 'none';
     });
   </script>
-
 </body>
 </html>
