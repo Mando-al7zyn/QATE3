@@ -1,451 +1,592 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>موقع الجيمرز والمبرمجين</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #333, #111);
-      color: #f0f0f0;
-      height: 100vh;
-      overflow: auto;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>موقع الجيمرز والمبرمجين</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #222, #000); /* خلفية أغمق */
+      color: #f0f0f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    header {
-      background-color: #2a2a2a;
-      padding: 20px 40px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-    }
+    header {
+      background-color: #1a1a1a; /* لون أغمق */
+      padding: 20px 40px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      position: sticky; /* شريط تنقل ثابت */
+      top: 0;
+      z-index: 100;
+    }
 
-    header h1 {
-      margin: 0;
-      font-size: 3rem;
-      color: #ffffff;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-    }
+    header h1 {
+      margin: 0;
+      font-size: 3.5rem;
+      color: #00ffff; /* لون أزرق سيان مميز */
+      text-shadow: 0 0 10px rgba(0,255,255,0.8);
+      letter-spacing: 2px;
+    }
 
-    nav {
-      margin-top: 10px;
-    }
+    nav {
+      margin-top: 15px;
+    }
 
-    nav button {
-      background: none;
-      border: none;
-      color: #bbbbbb;
-      margin: 0 15px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: color 0.3s, transform 0.3s;
-    }
+    nav button {
+      background: none;
+      border: none;
+      color: #ffffff; /* لون أبيض واضح */
+      margin: 0 20px;
+      font-weight: bold;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+    }
 
-    nav button:hover {
-      color: #ffffff;
-      transform: scale(1.1);
-    }
+    nav button:hover {
+      color: #00ffff;
+      transform: translateY(-3px);
+      text-shadow: 0 0 8px #00ffff;
+    }
 
-    section {
-      display: none;
-      padding: 80px 20px;
-      text-align: center;
-      background-color: #1f1f1f;
-      border-radius: 10px;
-      box-shadow: 0 10px 15px rgba(0,0,0,0.5);
-      transition: opacity 0.3s;
-      min-height: 100vh;
-    }
+    section {
+      display: none;
+      padding: 80px 20px;
+      text-align: center;
+      background-color: #111;
+      border-radius: 15px;
+      margin: 40px auto;
+      max-width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      transition: opacity 0.5s;
+      min-height: 50vh;
+    }
 
-    section.active {
-      display: block;
-    }
+    section.active {
+      display: block;
+    }
 
-    section h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: #e0e0e0;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-    }
+    section h2 {
+      font-size: 3.5rem;
+      margin-bottom: 25px;
+      color: #00ffff;
+      text-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
 
-    section p {
-      font-size: 1.5rem;
-      max-width: 700px;
-      margin: 0 auto;
-      color: #cccccc;
-    }
+    section p {
+      font-size: 1.6rem;
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      color: #dddddd;
+      line-height: 1.8;
+    }
 
-    .cta-button, .service-buttons a {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background-color: #444;
-      color: #fff;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s, transform 0.3s;
-    }
+    .cta-button, .service-buttons a {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 18px 40px;
+      background-color: #00ffff; /* لون سيان رئيسي */
+      color: #1a1a1a;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+      transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 0 15px rgba(0,255,255,0.5);
+    }
 
-    .cta-button:hover, .service-buttons a:hover {
-      background-color: #666;
-      transform: translateY(-5px);
-    }
+    .cta-button:hover, .service-buttons a:hover {
+      background-color: #00dddd;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,255,0.8);
+    }
 
-    .service-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
+    .service-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
 
-    .dropdown-container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
+    .service-buttons a {
+      background-color: #333;
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      padding: 15px 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .service-buttons a:hover {
+      background-color: #00ffff;
+      color: #111;
+      box-shadow: 0 0 15px #00ffff;
+    }
 
-    .dropdown-list {
-      position: absolute;
-      top: 100%;
-      background: #2a2a2a;
-      padding: 10px;
-      border-radius: 10px;
-      list-style: none;
-      width: 250px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
+    .dropdown-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
 
-    .dropdown-list li {
-      padding: 10px;
-      cursor: pointer;
-      color: #eee;
-      transition: background 0.3s;
-      border-bottom: 1px solid #444;
-    }
+    .dropdown-list {
+      position: absolute;
+      top: 100%;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      list-style: none;
+      width: 300px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      z-index: 99;
+      border: 1px solid #00ffff;
+    }
 
-    .dropdown-list li:last-child {
-      border-bottom: none;
-    }
+    .dropdown-list li {
+      padding: 12px;
+      cursor: pointer;
+      color: #eee;
+      font-size: 1.1rem;
+      transition: background 0.3s, color 0.3s;
+      border-bottom: 1px dashed #333;
+      text-align: right;
+    }
 
-    .dropdown-list li:hover {
-      background-color: #444;
-    }
+    .dropdown-list li:last-child {
+      border-bottom: none;
+    }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #2a2a2a;
-      font-size: 0.9rem;
-      color: #999;
-    }
+    .dropdown-list li:hover {
+      background-color: #333;
+      color: #00ffff;
+    }
 
-    .add-toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #444;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      display: none;
-      pointer-events: none;
-    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #1a1a1a;
+      font-size: 1rem;
+      color: #777;
+      border-top: 1px solid #333;
+    }
 
-    .cart-box {
-      position: fixed;
-      left: 20px;
-      top: 80px;
-      background: #111;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 1.2rem;
-      box-shadow: 0 0 8px rgba(0,0,0,0.6);
-      z-index: 1000;
-      cursor: pointer;
-    }
+    .add-toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00ffff; /* لون التوست */
+      color: #111;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+      z-index: 1000;
+      display: none;
+      pointer-events: none;
+      animation: fadeInOut 2.5s ease-in-out forwards;
+    }
 
-    .cart-details {
-      position: fixed;
-      left: 20px;
-      top: 160px;
-      background: #2a2a2a;
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-      z-index: 1000;
-      display: none;
-      max-width: 300px;
-      overflow-y: auto;
-      max-height: 400px;
-    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; top: 0px; }
+      20% { opacity: 1; top: 20px; }
+      80% { opacity: 1; top: 20px; }
+      100% { opacity: 0; top: 0px; }
+    }
 
-    .cart-details h3 {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-      color: #ddd;
-    }
+    .cart-box {
+      position: fixed;
+      left: 30px;
+      top: 120px; /* موقع مختلف لا يتعارض مع الشريط */
+      background: #00ffff;
+      color: #111;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 2rem;
+      box-shadow: 0 0 15px rgba(0,255,255,0.8);
+      z-index: 101;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
+    .cart-box:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 0 25px rgba(0,255,255,1);
+    }
 
-    .cart-item span {
-      font-weight: bold;
-    }
+    .cart-details {
+      position: fixed;
+      left: 30px;
+      top: 210px;
+      background: #1a1a1a;
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      z-index: 102;
+      display: none;
+      max-width: 320px;
+      overflow-y: auto;
+      max-height: 400px;
+      border: 1px solid #00ffff;
+    }
 
-    .cart-total {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
+    .cart-details h3 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #00ffff;
+      border-bottom: 2px solid #00ffff;
+      padding-bottom: 10px;
+    }
 
-    .submit-order-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 5px;
-      font-weight: bold;
-      text-align: center;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.3s, transform 0.3s;
-    }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 3fr 1fr 1fr 1fr;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dotted #333;
+      font-size: 1.1rem;
+    }
 
-    .submit-order-btn:hover {
-      background-color: #45a049;
-      transform: translateY(-5px);
-    }
+    .cart-item span {
+      font-weight: bold;
+      color: #ddd;
+    }
+    
+    .cart-item button {
+      background: #333;
+      border: none;
+      color: white;
+      padding: 5px;
+      margin: 0 2px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .cart-item button:hover {
+      background: #00ffff;
+      color: #111;
+    }
 
-    .container {
-      min-height: 100vh;
-      overflow-y: auto;
-      padding-bottom: 100px;
-    }
-  </style>
+    .cart-total {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #00ffff;
+      border-top: 2px solid #00ffff;
+      padding-top: 15px;
+    }
+
+    .submit-order-btn {
+      margin-top: 25px;
+      padding: 15px 20px;
+      background-color: #00ffff; /* لون سيان */
+      color: #111;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      border: none;
+    }
+
+    .submit-order-btn:hover {
+      background-color: #00dddd;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,255,255,0.6);
+    }
+    
+    #support textarea {
+      width: 80%;
+      max-width: 600px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 2px solid #333;
+      background: #222;
+      color: #eee;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-family: 'Cairo', sans-serif;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+      resize: vertical;
+    }
+    
+    #support .submit-order-btn {
+      width: auto;
+      padding: 15px 50px;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <h1>حياه واقعيه</h1>
-    <nav>
-      <button onclick="showSection('home')">🏠 الرئيسية</button>
-      <button onclick="showSection('about')">👥 من نحن</button>
-      <button onclick="showSection('services')">💼 الخدمات</button>
-      <button onclick="showSection('support')">🛠️ الدعم الفني</button>
-    </nav>
-  </header>
+  <header>
+    <h1>حياه واقعيه</h1>
+    <nav>
+      <button onclick="showSection('home')">🏠 الرئيسية</button>
+      <button onclick="showSection('about')">👥 من نحن</button>
+      <button onclick="showSection('services')">💼 الخدمات</button>
+      <button onclick="showSection('support')">🛠️ الدعم الفني</button>
+    </nav>
+  </header>
 
-  <div class="container">
-    <section id="home" class="active">
-      <h2>احترافي برمجه ✨</h2>
-      <p>تم تصميمه بشكل احترافي علي يد المبرمج 1g𝒁 👨‍💻</p>
-      <a href="#" class="cta-button" onclick="showSection('services')">ابدأ الآن 🚀</a>
-    </section>
+  <div class="container">
+    <section id="home" class="active">
+      <h2>احترافي برمجه ✨</h2>
+      <p>تم تصميم هذا الموقع الاحترافي على يد المبرمج **1g𝒁** 👨‍💻. نحن نقدم حلولاً برمجية وخدمات تطوير احترافية.</p>
+      <a href="#" class="cta-button" onclick="showSection('services')">ابدأ الآن 🚀</a>
+    </section>
 
-    <section id="about">
-      <h2>من نحن 👨‍💻</h2>
-      <p>نحن مجموعة من الجيمرز والمبرمجين نؤمن بالإبداع والتطوير ونقدم خبراتنا لتقديم محتوى رقمي احترافي. 👾</p>
-      <p><strong>المبرمج 1g𝒁</strong></p>
-    </section>
+    <section id="about">
+      <h2>من نحن 👨‍💻</h2>
+      <p>نحن مجموعة من **الجيمرز والمبرمجين** نؤمن بالإبداع والتطوير. نكرس خبرتنا لتقديم محتوى رقمي احترافي، بدءاً من تطوير المواقع وصولاً إلى برمجة البوتات المتخصصة.</p>
+      <p><strong>المبرمج الرئيسي: 1g𝒁</strong> - متخصص في تطوير التطبيقات والحلول البرمجية المبتكرة.</p>
+    </section>
 
-    <section id="services">
-      <h2>الخدمات 🔧</h2>
+    <section id="services">
+      <h2>الخدمات 🔧</h2>
+      <p>اختر من بين خدماتنا الاحترافية المتاحة:</p>
 
-      <div class="service-buttons">
-        <a href="#" onclick="toggleXpItems()">🔹 مساعدة لزيادة XP</a>
-        <a href="#" onclick="toggleIllegalItems()">🤖 برمجة بوتات بايثون</a>
-      </div>
+      <div class="service-buttons">
+        <a href="#" onclick="toggleXpItems()">🔹 خدمات الخبرة والتعليم</a>
+        <a href="#" onclick="toggleIllegalItems()">🤖 برمجة بوتات بايثون وديسكورد</a>
+      </div>
 
-      <div class="dropdown-container">
-        <ul id="xp-items" class="dropdown-list" style="display: none;">
-          <li onclick="addToCart('🪵 أخشاب', 900)">🪵 أخشاب</li>
-          <li onclick="addToCart('📈 زيادة خبرتك', 250)">📈 زيادة خبرتك</li>
-          <li onclick="addToCart('🐍 تعليم بايثون', 2000)">🐍 تعليم بايثون</li>
-        </ul>
+      <div class="dropdown-container">
+        <ul id="xp-items" class="dropdown-list" style="display: none;">
+          <li onclick="addToCart('🪵 أخشاب', 900)">🪵 أخشاب (900K)</li>
+          <li onclick="addToCart('📈 زيادة خبرتك', 250)">📈 زيادة خبرتك (250K)</li>
+          <li onclick="addToCart('🐍 تعليم بايثون', 2000)">🐍 تعليم بايثون (2000K)</li>
+        </ul>
 
-        <ul id="illegal-items" class="dropdown-list" style="display: none;">
-          <li onclick="addToCart('🤖 بوت ديسكورد متكامل', 20)">بوت ديسكورد متكامل</li>
-          <li onclick="addToCart('🎵 بوت موسيقى', 5)">بوت موسيقى</li>
-          <li onclick="addToCart('🛡️ بوت سيكيورتي', 10)">بوت سيكيورتي</li>
-          <li onclick="addToCart('👋 بوت ترحيب', 5)">بوت ترحيب</li>
-          <li onclick="addToCart('⚙️ بوت إدارة', 8)">بوت إدارة</li>
-        </ul>
-      </div>
-    </section>
+        <ul id="illegal-items" class="dropdown-list" style="display: none;">
+          <li onclick="addToCart('🤖 بوت ديسكورد متكامل', 20)">بوت ديسكورد متكامل (20K)</li>
+          <li onclick="addToCart('🎵 بوت موسيقى', 5)">بوت موسيقى (5K)</li>
+          <li onclick="addToCart('🛡️ بوت سيكيورتي', 10)">بوت سيكيورتي (10K)</li>
+          <li onclick="addToCart('👋 بوت ترحيب', 5)">بوت ترحيب (5K)</li>
+          <li onclick="addToCart('⚙️ بوت إدارة', 8)">بوت إدارة (8K)</li>
+        </ul>
+      </div>
+    </section>
 
-    <section id="support">
-      <h2>الدعم الفني 🛠️</h2>
-      <textarea id="support-message" rows="4" cols="50" placeholder="اكتب رسالتك هنا..."></textarea>
-      <button class="submit-order-btn" onclick="submitSupportMessage()">إرسال</button>
-    </section>
+    <section id="support">
+      <h2>الدعم الفني 🛠️</h2>
+      <p>هل لديك استفسار، مشكلة، أو تحتاج إلى خدمة مخصصة؟ راسلنا مباشرة وسنتواصل معك بأسرع وقت.</p>
+      <textarea id="support-message" rows="6" placeholder="اكتب رسالتك التفصيلية هنا..."></textarea>
+      <button class="submit-order-btn" onclick="submitSupportMessage()">إرسال رسالة الدعم 📧</button>
+    </section>
 
-    <div class="cart-box">🛒</div>
+    <div class="cart-box">🛒</div>
 
-    <div class="cart-details">
-      <h3>تفاصيل السلة 🛍️</h3>
-      <div id="cart-content"></div>
-      <div class="cart-total">المجموع: <span id="cart-total">0</span> K</div>
-      <div class="submit-order-btn" onclick="submitOrder()">إرسال الطلب 🚀</div>
-    </div>
+    <div class="cart-details">
+      <h3>تفاصيل السلة 🛍️</h3>
+      <div id="cart-content"></div>
+      <div class="cart-total">المجموع: <span id="cart-total">0</span> K</div>
+      <button class="submit-order-btn" onclick="submitOrder()">إرسال الطلب الآن 🚀</button>
+    </div>
 
-    <div class="add-toast" id="toast-message">تم إضافة العنصر إلى السلة ✔️</div>
-  </div>
+    <div class="add-toast" id="toast-message"></div>
+  </div>
 
-  <footer>
-    <p>© 2025 جميع الحقوق محفوظة | تصميم من فريق الجيمرز والمبرمجين</p>
-  </footer>
+  <footer>
+    <p>✨ جميع الحقوق محفوظة لفريق الجيمرز والمبرمجين | تصميم وإشراف: 1g𝒁 © 2025</p>
+  </footer>
 
-  <script>
-    let cart = [];
-    const cartContent = document.getElementById('cart-content');
-    const cartTotal = document.getElementById('cart-total');
-    const toastMessage = document.getElementById('toast-message');
-    const cartDetailsContainer = document.querySelector('.cart-details');
-    const cartBox = document.querySelector('.cart-box');
-    const illegalItems = document.getElementById('illegal-items');
-    const xpItems = document.getElementById('xp-items');
-    const supportMessage = document.getElementById('support-message');
+  <script>
+    let cart = [];
+    const cartContent = document.getElementById('cart-content');
+    const cartTotal = document.getElementById('cart-total');
+    const toastMessage = document.getElementById('toast-message');
+    const cartDetailsContainer = document.querySelector('.cart-details');
+    const cartBox = document.querySelector('.cart-box');
+    const illegalItems = document.getElementById('illegal-items');
+    const xpItems = document.getElementById('xp-items');
+    const supportMessage = document.getElementById('support-message');
+    
+    // Discord Webhook URL (استخدم نفس الرابط لغرض العرض)
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1436112997905862677/ylK3AYDRlpkKsusbjjwr43dUgtKQe4cuEzYTBNXyMM0SqcNnG9Elyg-M_BDMzgkTTUTJ";
 
-    function showSection(sectionId) {
-      document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-    }
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      // إخفاء القوائم المنسدلة عند التبديل
+      illegalItems.style.display = 'none';
+      xpItems.style.display = 'none';
+      // إخفاء تفاصيل السلة
+      cartDetailsContainer.style.display = 'none';
+    }
 
-    function addToCart(item, price) {
-      const existingItem = cart.find(i => i.name === item);
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        cart.push({ name: item, price: price, quantity: 1 });
-      }
-      updateCart();
-      showToast(`تم إضافة ${item} إلى السلة 🛒`);
-    }
+    function showToast(message) {
+      toastMessage.innerText = message;
+      // إعادة تشغيل الأنيمايشن
+      toastMessage.style.animation = 'none';
+      toastMessage.offsetHeight; // force reflow
+      toastMessage.style.animation = null; 
+      toastMessage.style.display = 'block';
+      setTimeout(() => toastMessage.style.display = 'none', 2500);
+    }
 
-    function removeFromCart(itemName) {
-      const itemIndex = cart.findIndex(i => i.name === itemName);
-      if (itemIndex !== -1) {
-        cart.splice(itemIndex, 1);
-      }
-      updateCart();
-      showToast(`🗑️ تم حذف ${itemName} من السلة`);
-    }
+    function addToCart(item, price) {
+      const existingItem = cart.find(i => i.name === item);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ name: item, price: price, quantity: 1 });
+      }
+      updateCart();
+      showToast(`تم إضافة ${item} إلى السلة 🛒`);
+    }
 
-    function decreaseQuantity(itemName) {
-      const item = cart.find(i => i.name === itemName);
-      if (item && item.quantity > 1) {
-        item.quantity--;
-        updateCart();
-      }
-    }
+    function removeFromCart(itemName) {
+      const itemIndex = cart.findIndex(i => i.name === itemName);
+      if (itemIndex !== -1) {
+        const removedItemName = cart[itemIndex].name;
+        cart.splice(itemIndex, 1);
+        updateCart();
+        showToast(`🗑️ تم حذف ${removedItemName} من السلة`);
+      }
+    }
+    
+    function increaseQuantity(itemName) {
+      const item = cart.find(i => i.name === itemName);
+      if (item) {
+        item.quantity++;
+        updateCart();
+      }
+    }
 
-    function updateCart() {
-      cartContent.innerHTML = '';
-      let total = 0;
-      cart.forEach(item => {
-        cartContent.innerHTML += `
-          <div class="cart-item">
-            <span>${item.name}</span> - ${item.quantity} × ${item.price}
-            <button onclick="decreaseQuantity('${item.name}')">➖</button>
-            <button onclick="removeFromCart('${item.name}')">🗑️</button>
-          </div>
-        `;
-        total += item.price * item.quantity;
-      });
-      cartTotal.innerText = total;
-    }
+    function decreaseQuantity(itemName) {
+      const item = cart.find(i => i.name === itemName);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        updateCart();
+      } else if (item && item.quantity === 1) {
+        removeFromCart(itemName); // حذف إذا كانت الكمية 1
+      }
+    }
 
-    function showToast(message) {
-      toastMessage.innerText = message;
-      toastMessage.style.display = 'block';
-      setTimeout(() => toastMessage.style.display = 'none', 2000);
-    }
+    function updateCart() {
+      cartContent.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        cartContent.innerHTML += `
+          <div class="cart-item">
+            <span>${item.name} (${itemTotal}K)</span>
+            <span>×${item.quantity}</span>
+            <button onclick="decreaseQuantity('${item.name}')">➖</button>
+            <button onclick="increaseQuantity('${item.name}')">➕</button>
+          </div>
+        `;
+        total += itemTotal;
+      });
+      cartTotal.innerText = total;
+    }
 
-    function toggleIllegalItems() {
-      xpItems.style.display = 'none';
-      illegalItems.style.display = illegalItems.style.display === 'none' ? 'block' : 'none';
-    }
+    function toggleIllegalItems() {
+      xpItems.style.display = 'none';
+      illegalItems.style.display = illegalItems.style.display === 'none' ? 'block' : 'none';
+    }
 
-    function toggleXpItems() {
-      illegalItems.style.display = 'none';
-      xpItems.style.display = xpItems.style.display === 'none' ? 'block' : 'none';
-    }
+    function toggleXpItems() {
+      illegalItems.style.display = 'none';
+      xpItems.style.display = xpItems.style.display === 'none' ? 'block' : 'none';
+    }
 
-    // ✅ إرسال الطلب إلى Discord
-    function submitOrder() {
-      if (cart.length === 0) {
-        showToast('🚫 السلة فارغة! أضف عناصر أولاً.');
-        return;
-      }
+    // ✅ إرسال الطلب إلى Discord
+    function submitOrder() {
+      if (cart.length === 0) {
+        showToast('🚫 السلة فارغة! أضف عناصر أولاً.');
+        return;
+      }
 
-      const now = new Date();
-      const time = now.toLocaleTimeString('ar-EG');
-      const date = now.toLocaleDateString('ar-EG');
+      const now = new Date();
+      const time = now.toLocaleTimeString('ar-EG');
+      const date = now.toLocaleDateString('ar-EG');
 
-      let orderMessage = "📦 **طلب جديد من موقع الجيمرز والمبرمجين!**\n";
-      orderMessage += `🧑‍💻 **المبرمج:** 1g𝒁\n`;
-      orderMessage += `🕒 **الوقت:** ${time} - ${date}\n\n`;
-      orderMessage += "🛒 **تفاصيل الطلب:**\n";
+      let orderMessage = "📦 **طلب جديد من موقع الجيمرز والمبرمجين!**\n";
+      orderMessage += `🧑‍💻 **المبرمج:** 1g𝒁\n`;
+      orderMessage += `🕒 **الوقت:** ${time} - ${date}\n\n`;
+      orderMessage += "🛒 **تفاصيل الطلب:**\n";
 
-      cart.forEach(item => {
-        orderMessage += `> 💠 ${item.name} × ${item.quantity} = 💰 ${item.price * item.quantity}K\n`;
-      });
+      cart.forEach(item => {
+        orderMessage += `> 💠 ${item.name} × ${item.quantity} = 💰 ${item.price * item.quantity}K\n`;
+      });
 
-      const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-      orderMessage += `\n💵 **المجموع الكلي:** ${total}K\n`;
-      orderMessage += "✅ **تم الإرسال من موقع 1g𝒁 🔥**";
+      const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      orderMessage += `\n💵 **المجموع الكلي:** ${total}K\n`;
+      orderMessage += "✅ **تم الإرسال من موقع 1g𝒁 🔥**";
 
-      fetch("https://discord.com/api/webhooks/1436112997905862677/ylK3AYDRlpkKsusbjjwr43dUgtKQe4cuEzYTBNXyMM0SqcNnG9Elyg-M_BDMzgkTTUTJ", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: orderMessage })
-      })
-      .then(res => {
-        if (res.ok) {
-          showToast('🎉 تم إرسال الطلب بنجاح إلى ديسكورد!');
-          cart = [];
-          updateCart();
-        } else {
-          showToast('⚠️ حدث خطأ أثناء الإرسال!');
-        }
-      })
-      .catch(() => showToast('🚨 لم يتم الاتصال بالويب هوك.'));
-    }
+      fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: orderMessage })
+      })
+      .then(res => {
+        if (res.ok) {
+          showToast('🎉 تم إرسال الطلب بنجاح! سيتم التواصل معك قريباً.');
+          cart = [];
+          updateCart();
+          cartDetailsContainer.style.display = 'none';
+        } else {
+          showToast('⚠️ حدث خطأ أثناء إرسال الطلب!');
+        }
+      })
+      .catch(() => showToast('🚨 فشل الاتصال بخدمة الإرسال.'));
+    }
 
-    function submitSupportMessage() {
-      if (supportMessage.value) {
-        alert('✅ تم إرسال الرسالة للدعم الفني بنجاح!');
-        supportMessage.value = '';
-      } else {
-        alert('⚠️ الرجاء كتابة رسالة قبل الإرسال!');
-      }
-    }
+    // ✅ إرسال رسالة الدعم الفني إلى Discord (باستخدام نفس الـ Web Hook)
+    function submitSupportMessage() {
+      const message = supportMessage.value.trim();
+      if (!message) {
+        showToast('⚠️ الرجاء كتابة رسالة قبل الإرسال!');
+        return;
+      }
 
-    cartBox.addEventListener('click', () => {
-      cartDetailsContainer.style.display = cartDetailsContainer.style.display === 'none' ? 'block' : 'none';
-    });
-  </script>
+      const now = new Date();
+      const time = now.toLocaleTimeString('ar-EG');
+      const date = now.toLocaleDateString('ar-EG');
+
+      let supportContent = "📧 **رسالة دعم فني جديدة من الموقع**\n";
+      supportContent += `🕒 **الوقت:** ${time} - ${date}\n\n`;
+      supportContent += "📝 **نص الرسالة:**\n";
+      supportContent += `> ${message}\n`;
+
+      fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: supportContent })
+      })
+      .then(res => {
+        if (res.ok) {
+          showToast('✅ تم إرسال رسالة الدعم بنجاح! شكراً لك.');
+          supportMessage.value = '';
+        } else {
+          showToast('⚠️ حدث خطأ أثناء إرسال رسالة الدعم!');
+        }
+      })
+      .catch(() => showToast('🚨 فشل الاتصال بخدمة الإرسال للدعم الفني.'));
+    }
+
+    cartBox.addEventListener('click', () => {
+      cartDetailsContainer.style.display = cartDetailsContainer.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
 </body>
 </html>
