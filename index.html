@@ -1,592 +1,286 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>موقع الجيمرز والمبرمجين</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #222, #000); /* خلفية أغمق */
-      color: #f0f0f0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Universe - Uiverse Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === 1. تنسيقات عامة والـ Body === */
+        body {
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* لمنع شريط التمرير الأفقي */
+            line-height: 1.6;
+        }
 
-    header {
-      background-color: #1a1a1a; /* لون أغمق */
-      padding: 20px 40px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-      position: sticky; /* شريط تنقل ثابت */
-      top: 0;
-      z-index: 100;
-    }
+        /* محاكاة للخلفية النجمية / الكونية */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(14, 18, 25, 0.95) 0%, rgba(11, 12, 16, 1) 70%), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white"/><circle cx="50" cy="50" r="0.8" fill="#90fcf0"/><circle cx="90" cy="20" r="0.6" fill="white"/><circle cx="30" cy="80" r="0.7" fill="#ff5757"/></svg>') repeat;
+            opacity: 0.9;
+            z-index: -1;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 3.5rem;
-      color: #00ffff; /* لون أزرق سيان مميز */
-      text-shadow: 0 0 10px rgba(0,255,255,0.8);
-      letter-spacing: 2px;
-    }
+        /* === 2. الهيدر والتنقل === */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: rgba(11, 12, 16, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
 
-    nav {
-      margin-top: 15px;
-    }
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #66fcf1;
+        }
 
-    nav button {
-      background: none;
-      border: none;
-      color: #ffffff; /* لون أبيض واضح */
-      margin: 0 20px;
-      font-weight: bold;
-      font-size: 1.3rem;
-      cursor: pointer;
-      transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
-    }
+        nav a {
+            color: #c5c6c7;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
 
-    nav button:hover {
-      color: #00ffff;
-      transform: translateY(-3px);
-      text-shadow: 0 0 8px #00ffff;
-    }
+        nav a:hover {
+            color: #45a29e;
+        }
 
-    section {
-      display: none;
-      padding: 80px 20px;
-      text-align: center;
-      background-color: #111;
-      border-radius: 15px;
-      margin: 40px auto;
-      max-width: 90%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      transition: opacity 0.5s;
-      min-height: 50vh;
-    }
+        .nav-button {
+            background-color: #45a29e;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: #0b0c10 !important;
+            font-weight: 700;
+        }
 
-    section.active {
-      display: block;
-    }
+        /* === 3. القسم الرئيسي (Hero) === */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 50px;
+        }
 
-    section h2 {
-      font-size: 3.5rem;
-      margin-bottom: 25px;
-      color: #00ffff;
-      text-shadow: 0 0 10px rgba(0,255,255,0.5);
-    }
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 50px;
+            /* تأثير التوهج الملون */
+            background: linear-gradient(90deg, #66fcf1, #ff5757, #66fcf1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+        }
 
-    section p {
-      font-size: 1.6rem;
-      max-width: 800px;
-      margin: 0 auto 20px auto;
-      color: #dddddd;
-      line-height: 1.8;
-    }
+        /* زر الإضافة (ADD ALL BOTS) */
+        .add-all-btn {
+            background: linear-gradient(45deg, #66fcf1, #45a29e, #ff5757);
+            border: none;
+            color: #0b0c10;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.5);
+            transition: all 0.3s ease;
+        }
 
-    .cta-button, .service-buttons a {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 18px 40px;
-      background-color: #00ffff; /* لون سيان رئيسي */
-      color: #1a1a1a;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.3rem;
-      transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
-      box-shadow: 0 0 15px rgba(0,255,255,0.5);
-    }
+        .add-all-btn:hover {
+            box-shadow: 0 0 30px rgba(255, 87, 87, 0.7);
+            transform: scale(1.05);
+        }
 
-    .cta-button:hover, .service-buttons a:hover {
-      background-color: #00dddd;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0,255,255,0.8);
-    }
+        /* === 4. قسم بطاقات البوتات === */
+        .bot-cards-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px 50px;
+        }
 
-    .service-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
+        .card {
+            background-color: #1f2833; /* لون البطاقة الداكن */
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            width: 300px; /* عرض ثابت للبطاقة */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid #33405c;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .service-buttons a {
-      background-color: #333;
-      color: #00ffff;
-      border: 2px solid #00ffff;
-      padding: 15px 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    .service-buttons a:hover {
-      background-color: #00ffff;
-      color: #111;
-      box-shadow: 0 0 15px #00ffff;
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 252, 241, 0.2);
+        }
 
-    .dropdown-container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-    }
+        .card h3 {
+            color: #66fcf1;
+            font-size: 1.4em;
+            border-bottom: 2px solid #33405c;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
 
-    .dropdown-list {
-      position: absolute;
-      top: 100%;
-      background: #1a1a1a;
-      padding: 15px;
-      border-radius: 10px;
-      list-style: none;
-      width: 300px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-      z-index: 99;
-      border: 1px solid #00ffff;
-    }
+        .card-header-icon {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-    .dropdown-list li {
-      padding: 12px;
-      cursor: pointer;
-      color: #eee;
-      font-size: 1.1rem;
-      transition: background 0.3s, color 0.3s;
-      border-bottom: 1px dashed #333;
-      text-align: right;
-    }
+        .card-header-icon img {
+            width: 80px;
+            height: 80px;
+            margin-left: 15px;
+        }
 
-    .dropdown-list li:last-child {
-      border-bottom: none;
-    }
+        /* تفاصيل البطاقة (الأجزاء الداخلية) */
+        .card-details p, .card-details li {
+            font-size: 0.9em;
+            color: #c5c6c7;
+        }
 
-    .dropdown-list li:hover {
-      background-color: #333;
-      color: #00ffff;
-    }
+        .card-details ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #1a1a1a;
-      font-size: 1rem;
-      color: #777;
-      border-top: 1px solid #333;
-    }
+        .card-details li {
+            background-color: #0b0c10;
+            padding: 8px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #66fcf1; /* خط جانبي مميز */
+        }
 
-    .add-toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #00ffff; /* لون التوست */
-      color: #111;
-      padding: 15px 30px;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-      z-index: 1000;
-      display: none;
-      pointer-events: none;
-      animation: fadeInOut 2.5s ease-in-out forwards;
-    }
+        /* أزرار التشغيل داخل البطاقة (مثل Amplify) */
+        .play-btn {
+            background: none;
+            border: 2px solid #ff5757;
+            color: #ff5757;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    @keyframes fadeInOut {
-      0% { opacity: 0; top: 0px; }
-      20% { opacity: 1; top: 20px; }
-      80% { opacity: 1; top: 20px; }
-      100% { opacity: 0; top: 0px; }
-    }
+        .play-btn:hover {
+            background-color: #ff5757;
+            color: #0b0c10;
+        }
 
-    .cart-box {
-      position: fixed;
-      left: 30px;
-      top: 120px; /* موقع مختلف لا يتعارض مع الشريط */
-      background: #00ffff;
-      color: #111;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 2rem;
-      box-shadow: 0 0 15px rgba(0,255,255,0.8);
-      z-index: 101;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .cart-box:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 0 25px rgba(0,255,255,1);
-    }
-
-    .cart-details {
-      position: fixed;
-      left: 30px;
-      top: 210px;
-      background: #1a1a1a;
-      color: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-      z-index: 102;
-      display: none;
-      max-width: 320px;
-      overflow-y: auto;
-      max-height: 400px;
-      border: 1px solid #00ffff;
-    }
-
-    .cart-details h3 {
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      color: #00ffff;
-      border-bottom: 2px solid #00ffff;
-      padding-bottom: 10px;
-    }
-
-    .cart-item {
-      display: grid;
-      grid-template-columns: 3fr 1fr 1fr 1fr;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding: 8px 0;
-      border-bottom: 1px dotted #333;
-      font-size: 1.1rem;
-    }
-
-    .cart-item span {
-      font-weight: bold;
-      color: #ddd;
-    }
-    
-    .cart-item button {
-      background: #333;
-      border: none;
-      color: white;
-      padding: 5px;
-      margin: 0 2px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    
-    .cart-item button:hover {
-      background: #00ffff;
-      color: #111;
-    }
-
-    .cart-total {
-      margin-top: 20px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #00ffff;
-      border-top: 2px solid #00ffff;
-      padding-top: 15px;
-    }
-
-    .submit-order-btn {
-      margin-top: 25px;
-      padding: 15px 20px;
-      background-color: #00ffff; /* لون سيان */
-      color: #111;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-align: center;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      border: none;
-    }
-
-    .submit-order-btn:hover {
-      background-color: #00dddd;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,255,255,0.6);
-    }
-    
-    #support textarea {
-      width: 80%;
-      max-width: 600px;
-      padding: 15px;
-      margin-bottom: 20px;
-      border: 2px solid #333;
-      background: #222;
-      color: #eee;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-family: 'Cairo', sans-serif;
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-      resize: vertical;
-    }
-    
-    #support .submit-order-btn {
-      width: auto;
-      padding: 15px 50px;
-    }
-  </style>
+        /* === 5. تنسيق الاستجابة (Responsive) === */
+        @media (max-width: 1000px) {
+            header { padding: 15px 20px; }
+            nav a { margin-left: 15px; }
+            .hero h1 { font-size: 2.5em; }
+            .bot-cards-container { padding: 20px; }
+            .card { width: 90%; margin: 15px auto; }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>حياه واقعيه</h1>
-    <nav>
-      <button onclick="showSection('home')">🏠 الرئيسية</button>
-      <button onclick="showSection('about')">👥 من نحن</button>
-      <button onclick="showSection('services')">💼 الخدمات</button>
-      <button onclick="showSection('support')">🛠️ الدعم الفني</button>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">🤖 Uiverse.io</div>
+        <nav>
+            <a href="#">HOME</a>
+            <a href="#">BOTS</a>
+            <a href="#">DOCUMENTATION</a>
+            <a href="#">SUPPORT</a>
+            <a href="#" class="nav-button">SUPPORT</a>
+        </nav>
+    </header>
 
-  <div class="container">
-    <section id="home" class="active">
-      <h2>احترافي برمجه ✨</h2>
-      <p>تم تصميم هذا الموقع الاحترافي على يد المبرمج **1g𝒁** 👨‍💻. نحن نقدم حلولاً برمجية وخدمات تطوير احترافية.</p>
-      <a href="#" class="cta-button" onclick="showSection('services')">ابدأ الآن 🚀</a>
-    </section>
+    <section class="hero">
+        <h1>DISCORD BOT UNIVERSE</h1>
+        <button class="add-all-btn">ADD ALL BOTS</button>
+    </section>
 
-    <section id="about">
-      <h2>من نحن 👨‍💻</h2>
-      <p>نحن مجموعة من **الجيمرز والمبرمجين** نؤمن بالإبداع والتطوير. نكرس خبرتنا لتقديم محتوى رقمي احترافي، بدءاً من تطوير المواقع وصولاً إلى برمجة البوتات المتخصصة.</p>
-      <p><strong>المبرمج الرئيسي: 1g𝒁</strong> - متخصص في تطوير التطبيقات والحلول البرمجية المبتكرة.</p>
-    </section>
+    <section class="bot-cards-container">
+        
+        <div class="card bot-card">
+            <h3>Guardian</h3>
+            <div class="card-header-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 6V18L12 22L21 18V6L12 2Z" fill="#45a29e" stroke="#66fcf1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div>
+                    <p style="margin:0; font-size: 0.9em; color: #66fcf1;">servers</p>
+                    <p style="font-size: 1.8em; font-weight: 700; margin: 0; color: #66fcf1;">1.2M+</p>
+                </div>
+            </div>
+            
+            <div class="card-details">
+                <h4>MODERATION</h4>
+                <ul>
+                    <li>VIEW MURDS</li>
+                    <li>Add & remove roles</li>
+                    <li>Automatic anti-spam</li>
+                </ul>
+                <h4>CALIPCMAIRS</h4>
+                <ul>
+                    <li>Bot configuration</li>
+                    <li>Stats and logs</li>
+                </ul>
+            </div>
+        </div>
 
-    <section id="services">
-      <h2>الخدمات 🔧</h2>
-      <p>اختر من بين خدماتنا الاحترافية المتاحة:</p>
+        <div class="card bot-card">
+            <h3>Amplify</h3>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p>Forms ltbiins fo lberd</p>
+                <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                    <img src="https://via.placeholder.com/50/ff5757/FFFFFF?text=M1" alt="Music" style="border-radius: 5px;">
+                    <img src="https://via.placeholder.com/50/66fcf1/0b0c10?text=M2" alt="Music" style="border-radius: 5px;">
+                    <img src="https://via.placeholder.com/50/45a29e/0b0c10?text=M3" alt="Music" style="border-radius: 5px;">
+                </div>
+                <button class="play-btn" style="margin-top: 20px;">PLAY MUSIC</button>
+                <a href="#" style="display: block; margin-top: 15px; color: #45a29e;">VIEW MUSIC</a>
+            </div>
+            
+            <div class="card-details">
+                <h4>FUD SEDLICE</h4>
+                <p>MBDE CUNATION</p>
+                <p style="font-size: 0.8em; color: #888;">Wlltched in dsrmndee hu ai ahrnntnocu awrat loeerlt.</p>
+                <p style="font-size: 0.8em; color: #888;">Ttlektdofgyst au tlsrapaimtd tonas thv blrasdprsd.</p>
+            </div>
+        </div>
 
-      <div class="service-buttons">
-        <a href="#" onclick="toggleXpItems()">🔹 خدمات الخبرة والتعليم</a>
-        <a href="#" onclick="toggleIllegalItems()">🤖 برمجة بوتات بايثون وديسكورد</a>
-      </div>
+        <div class="card bot-card">
+            <h3>Dungeon Buddy</h3>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <img src="https://via.placeholder.com/100x80/ffaa00/0b0c10?text=Chest" alt="Dungeon Chest" style="border-radius: 5px; border: 2px solid #ffaa00;">
+            </div>
+            
+            <div class="card-details">
+                <h4>SUPPORT</h4>
+                <ul>
+                    <li style="border-left: 3px solid #ff5757;">Andolc l helves</li>
+                    <li style="border-left: 3px solid #ff5757;">Commsxdct</li>
+                    <li style="border-left: 3px solid #ff5757;">Feli tlmns</li>
+                    <li style="border-left: 3px solid #ff5757;">Insliwd aed ledles</li>
+                </ul>
+                <h4 style="border: none; margin-top: 20px;">FAQ</h4>
+                <p style="font-size: 0.8em;">Need Qena ttosllarns</p>
+            </div>
+        </div>
+    </section>
 
-      <div class="dropdown-container">
-        <ul id="xp-items" class="dropdown-list" style="display: none;">
-          <li onclick="addToCart('🪵 أخشاب', 900)">🪵 أخشاب (900K)</li>
-          <li onclick="addToCart('📈 زيادة خبرتك', 250)">📈 زيادة خبرتك (250K)</li>
-          <li onclick="addToCart('🐍 تعليم بايثون', 2000)">🐍 تعليم بايثون (2000K)</li>
-        </ul>
-
-        <ul id="illegal-items" class="dropdown-list" style="display: none;">
-          <li onclick="addToCart('🤖 بوت ديسكورد متكامل', 20)">بوت ديسكورد متكامل (20K)</li>
-          <li onclick="addToCart('🎵 بوت موسيقى', 5)">بوت موسيقى (5K)</li>
-          <li onclick="addToCart('🛡️ بوت سيكيورتي', 10)">بوت سيكيورتي (10K)</li>
-          <li onclick="addToCart('👋 بوت ترحيب', 5)">بوت ترحيب (5K)</li>
-          <li onclick="addToCart('⚙️ بوت إدارة', 8)">بوت إدارة (8K)</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="support">
-      <h2>الدعم الفني 🛠️</h2>
-      <p>هل لديك استفسار، مشكلة، أو تحتاج إلى خدمة مخصصة؟ راسلنا مباشرة وسنتواصل معك بأسرع وقت.</p>
-      <textarea id="support-message" rows="6" placeholder="اكتب رسالتك التفصيلية هنا..."></textarea>
-      <button class="submit-order-btn" onclick="submitSupportMessage()">إرسال رسالة الدعم 📧</button>
-    </section>
-
-    <div class="cart-box">🛒</div>
-
-    <div class="cart-details">
-      <h3>تفاصيل السلة 🛍️</h3>
-      <div id="cart-content"></div>
-      <div class="cart-total">المجموع: <span id="cart-total">0</span> K</div>
-      <button class="submit-order-btn" onclick="submitOrder()">إرسال الطلب الآن 🚀</button>
-    </div>
-
-    <div class="add-toast" id="toast-message"></div>
-  </div>
-
-  <footer>
-    <p>✨ جميع الحقوق محفوظة لفريق الجيمرز والمبرمجين | تصميم وإشراف: 1g𝒁 © 2025</p>
-  </footer>
-
-  <script>
-    let cart = [];
-    const cartContent = document.getElementById('cart-content');
-    const cartTotal = document.getElementById('cart-total');
-    const toastMessage = document.getElementById('toast-message');
-    const cartDetailsContainer = document.querySelector('.cart-details');
-    const cartBox = document.querySelector('.cart-box');
-    const illegalItems = document.getElementById('illegal-items');
-    const xpItems = document.getElementById('xp-items');
-    const supportMessage = document.getElementById('support-message');
-    
-    // Discord Webhook URL (استخدم نفس الرابط لغرض العرض)
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1436112997905862677/ylK3AYDRlpkKsusbjjwr43dUgtKQe4cuEzYTBNXyMM0SqcNnG9Elyg-M_BDMzgkTTUTJ";
-
-    function showSection(sectionId) {
-      document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-      // إخفاء القوائم المنسدلة عند التبديل
-      illegalItems.style.display = 'none';
-      xpItems.style.display = 'none';
-      // إخفاء تفاصيل السلة
-      cartDetailsContainer.style.display = 'none';
-    }
-
-    function showToast(message) {
-      toastMessage.innerText = message;
-      // إعادة تشغيل الأنيمايشن
-      toastMessage.style.animation = 'none';
-      toastMessage.offsetHeight; // force reflow
-      toastMessage.style.animation = null; 
-      toastMessage.style.display = 'block';
-      setTimeout(() => toastMessage.style.display = 'none', 2500);
-    }
-
-    function addToCart(item, price) {
-      const existingItem = cart.find(i => i.name === item);
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        cart.push({ name: item, price: price, quantity: 1 });
-      }
-      updateCart();
-      showToast(`تم إضافة ${item} إلى السلة 🛒`);
-    }
-
-    function removeFromCart(itemName) {
-      const itemIndex = cart.findIndex(i => i.name === itemName);
-      if (itemIndex !== -1) {
-        const removedItemName = cart[itemIndex].name;
-        cart.splice(itemIndex, 1);
-        updateCart();
-        showToast(`🗑️ تم حذف ${removedItemName} من السلة`);
-      }
-    }
-    
-    function increaseQuantity(itemName) {
-      const item = cart.find(i => i.name === itemName);
-      if (item) {
-        item.quantity++;
-        updateCart();
-      }
-    }
-
-    function decreaseQuantity(itemName) {
-      const item = cart.find(i => i.name === itemName);
-      if (item && item.quantity > 1) {
-        item.quantity--;
-        updateCart();
-      } else if (item && item.quantity === 1) {
-        removeFromCart(itemName); // حذف إذا كانت الكمية 1
-      }
-    }
-
-    function updateCart() {
-      cartContent.innerHTML = '';
-      let total = 0;
-      cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        cartContent.innerHTML += `
-          <div class="cart-item">
-            <span>${item.name} (${itemTotal}K)</span>
-            <span>×${item.quantity}</span>
-            <button onclick="decreaseQuantity('${item.name}')">➖</button>
-            <button onclick="increaseQuantity('${item.name}')">➕</button>
-          </div>
-        `;
-        total += itemTotal;
-      });
-      cartTotal.innerText = total;
-    }
-
-    function toggleIllegalItems() {
-      xpItems.style.display = 'none';
-      illegalItems.style.display = illegalItems.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function toggleXpItems() {
-      illegalItems.style.display = 'none';
-      xpItems.style.display = xpItems.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // ✅ إرسال الطلب إلى Discord
-    function submitOrder() {
-      if (cart.length === 0) {
-        showToast('🚫 السلة فارغة! أضف عناصر أولاً.');
-        return;
-      }
-
-      const now = new Date();
-      const time = now.toLocaleTimeString('ar-EG');
-      const date = now.toLocaleDateString('ar-EG');
-
-      let orderMessage = "📦 **طلب جديد من موقع الجيمرز والمبرمجين!**\n";
-      orderMessage += `🧑‍💻 **المبرمج:** 1g𝒁\n`;
-      orderMessage += `🕒 **الوقت:** ${time} - ${date}\n\n`;
-      orderMessage += "🛒 **تفاصيل الطلب:**\n";
-
-      cart.forEach(item => {
-        orderMessage += `> 💠 ${item.name} × ${item.quantity} = 💰 ${item.price * item.quantity}K\n`;
-      });
-
-      const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-      orderMessage += `\n💵 **المجموع الكلي:** ${total}K\n`;
-      orderMessage += "✅ **تم الإرسال من موقع 1g𝒁 🔥**";
-
-      fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: orderMessage })
-      })
-      .then(res => {
-        if (res.ok) {
-          showToast('🎉 تم إرسال الطلب بنجاح! سيتم التواصل معك قريباً.');
-          cart = [];
-          updateCart();
-          cartDetailsContainer.style.display = 'none';
-        } else {
-          showToast('⚠️ حدث خطأ أثناء إرسال الطلب!');
-        }
-      })
-      .catch(() => showToast('🚨 فشل الاتصال بخدمة الإرسال.'));
-    }
-
-    // ✅ إرسال رسالة الدعم الفني إلى Discord (باستخدام نفس الـ Web Hook)
-    function submitSupportMessage() {
-      const message = supportMessage.value.trim();
-      if (!message) {
-        showToast('⚠️ الرجاء كتابة رسالة قبل الإرسال!');
-        return;
-      }
-
-      const now = new Date();
-      const time = now.toLocaleTimeString('ar-EG');
-      const date = now.toLocaleDateString('ar-EG');
-
-      let supportContent = "📧 **رسالة دعم فني جديدة من الموقع**\n";
-      supportContent += `🕒 **الوقت:** ${time} - ${date}\n\n`;
-      supportContent += "📝 **نص الرسالة:**\n";
-      supportContent += `> ${message}\n`;
-
-      fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: supportContent })
-      })
-      .then(res => {
-        if (res.ok) {
-          showToast('✅ تم إرسال رسالة الدعم بنجاح! شكراً لك.');
-          supportMessage.value = '';
-        } else {
-          showToast('⚠️ حدث خطأ أثناء إرسال رسالة الدعم!');
-        }
-      })
-      .catch(() => showToast('🚨 فشل الاتصال بخدمة الإرسال للدعم الفني.'));
-    }
-
-    cartBox.addEventListener('click', () => {
-      cartDetailsContainer.style.display = cartDetailsContainer.style.display === 'none' ? 'block' : 'none';
-    });
-  </script>
 </body>
 </html>
